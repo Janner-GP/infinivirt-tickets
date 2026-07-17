@@ -358,28 +358,6 @@ Ejemplos:
 
 ---
 
-# 🤝 Contribuciones
-
-1. Crear una rama.
-
-```
-feature/nueva-funcionalidad
-```
-
-2. Realizar cambios.
-
-3. Ejecutar pruebas.
-
-4. Crear Pull Request.
-
----
-
-# 📝 Licencia
-
-Este proyecto se distribuye bajo la licencia que defina el propietario del repositorio.
-
----
-
 # 👨‍💻 Autor
 
 **Janner González**
