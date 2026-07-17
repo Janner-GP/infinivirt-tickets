@@ -11,7 +11,7 @@ export interface UpdateAssignmentRuleData {
 
 /**
  * Puerto del dominio Assignment Rules. La implementación concreta (Prisma) vive en
- * infrastructure/persistence — ver docs/ADRs/008-backend-architecture-ddd-lite.md
+ * infrastructure/persistence — ver docs/arquitectura-carpetas.md
  */
 export abstract class AssignmentRuleRepository {
   abstract findAll(): Promise<AssignmentRuleEntity[]>;

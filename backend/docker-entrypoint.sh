@@ -14,9 +14,9 @@ echo "✅ PostgreSQL disponible"
 echo "🚀 Ejecutando migraciones..."
 npx prisma migrate deploy
 
-echo "🔄 Generando Prisma Client..."
-npx prisma generate
+echo "🌱 Sembrando datos de prueba (idempotente — si ya existen, no duplica nada)..."
+npx prisma db seed
 
 echo "▶️ Iniciando aplicación..."
 
-exec node dist/main.js
+exec node dist/src/main.js

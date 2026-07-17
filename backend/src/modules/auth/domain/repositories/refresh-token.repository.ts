@@ -8,7 +8,7 @@ export interface CreateRefreshTokenData {
 
 /**
  * Puerto del dominio Auth para la persistencia de refresh tokens.
- * Ver docs/ADRs/007-refresh-token-persistence.md
+ * Ver docs/logica-negocio-trade-offs.md
  */
 export abstract class RefreshTokenRepository {
   abstract create(data: CreateRefreshTokenData): Promise<RefreshTokenEntity>;

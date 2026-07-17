@@ -118,7 +118,39 @@ infinivirt-tickets/
 
 ---
 
-# 📦 Requisitos
+# 🐳 Levantar todo con Docker (recomendado)
+
+La forma más rápida de tener el sistema completo corriendo — Postgres, backend y frontend — es con un solo comando, sin instalar Node ni Postgres localmente:
+
+```bash
+docker compose up --build
+```
+
+Esto construye las 3 imágenes y arranca los 3 contenedores en orden (Postgres → backend → frontend), esperando a que cada uno esté realmente listo antes de levantar el siguiente:
+
+1. **postgres** arranca y expone healthcheck (`pg_isready`).
+2. **backend** espera a Postgres, corre `prisma migrate deploy`, siembra datos de prueba con `prisma db seed` (ver más abajo) y arranca la API en `http://localhost:3000/api`.
+3. **frontend** espera a que el backend esté saludable, sirve el build de producción de React con nginx en `http://localhost` y reenvía internamente `/api/*` hacia el contenedor del backend.
+
+Al terminar, entra a **http://localhost** — ya con datos de prueba cargados y cualquiera de las credenciales de abajo.
+
+**El seed solo puebla datos la primera vez**: corre en cada arranque del contenedor backend, pero es idempotente — usuarios/clientes/categorías usan `upsert` (nunca se duplican) y los tickets de ejemplo solo se crean si la tabla está vacía. Si quieres datos completamente nuevos, borra el volumen de Postgres (`docker compose down -v`) y vuelve a levantar.
+
+## 🔑 Credenciales de prueba
+
+Misma contraseña para las 4 (ya cargadas por el seed):
+
+| Rol                                            | Email                          | Contraseña      |
+| ---------------------------------------------- | ------------------------------ | ---------------- |
+| Administrador                                  | `admin@infinivirt.test`      | `Sup3r$ecret!` |
+| Agente de soporte                              | `agente@infinivirt.test`     | `Sup3r$ecret!` |
+| Agente de soporte (2do)                        | `agente2@infinivirt.test`    | `Sup3r$ecret!` |
+| Supervisor                                     | `supervisor@infinivirt.test` | `Sup3r$ecret!` |
+| Cliente (portal propio, vinculado a Acme Corp) | `cliente@acme.test`          | `Sup3r$ecret!` |
+
+---
+
+# 📦 Requisitos (solo si NO usas Docker)
 
 Antes de comenzar asegúrate de tener instalado:
 
@@ -129,7 +161,7 @@ Antes de comenzar asegúrate de tener instalado:
 
 ---
 
-# ⚙️ Instalación
+# ⚙️ Instalación manual (alternativa a Docker)
 
 ## Clonar el repositorio
 

@@ -39,6 +39,7 @@ temp/
 .env
 .env.*
 !.env.example
+!.env.template
 
 # ==========================
 # Logs

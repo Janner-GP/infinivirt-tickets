@@ -12,7 +12,7 @@ import { TicketRepository } from '../../domain/repositories/ticket.repository';
 /**
  * Autorización a nivel de fila: un Agente solo puede operar sobre tickets que
  * tiene asignados; un Cliente solo sobre tickets de su propia cuenta.
- * Complementa a RolesGuard — ver docs/ADRs/003-authentication.md
+ * Complementa a RolesGuard — ver docs/logica-negocio-trade-offs.md
  */
 @Injectable()
 export class TicketOwnershipGuard implements CanActivate {

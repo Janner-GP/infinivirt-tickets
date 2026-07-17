@@ -11,7 +11,7 @@ export interface CreateUserData {
 
 /**
  * Puerto del dominio Users. La implementación concreta (Prisma) vive en
- * infrastructure/persistence — ver docs/ADRs/008-backend-architecture-ddd-lite.md
+ * infrastructure/persistence — ver docs/arquitectura-carpetas.md
  */
 export abstract class UserRepository {
   abstract findById(id: string): Promise<UserEntity | null>;

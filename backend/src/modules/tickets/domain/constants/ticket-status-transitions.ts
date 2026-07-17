@@ -1,7 +1,7 @@
 import { TicketStatus } from '@prisma/client';
 
 /**
- * Máquina de estados del ticket — ver docs/ADRs (decisión confirmada con el usuario,
+ * Máquina de estados del ticket — ver docs/logica-negocio-trade-offs.md (decisión confirmada con el usuario,
  * no es una regla implícita del enunciado). Cualquier transición fuera de esta tabla
  * se rechaza con BadRequestException en TicketsService.
  */

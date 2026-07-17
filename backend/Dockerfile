@@ -24,11 +24,13 @@ WORKDIR /app
 
 RUN apk add --no-cache netcat-openbsd
 
-COPY package*.json ./
-
-RUN npm ci --omit=dev
-
+# node_modules ya viene completo (incluye devDependencies: prisma CLI y
+# ts-node, necesarios en runtime para `prisma migrate deploy` y `prisma db
+# seed`) — no se reinstala aparte, evita un npm ci redundante que solo se
+# terminaría descartando.
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/prisma.config.ts ./
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/dist ./dist
 

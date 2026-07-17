@@ -6,7 +6,7 @@ import { ROLES_KEY } from '../decorators/roles.decorator';
 
 /**
  * Autorización por rol. Complementa (no reemplaza) los guards de ownership
- * que se agregarán en el módulo de tickets — ver docs/ADRs/003-authentication.md
+ * que se agregarán en el módulo de tickets — ver docs/logica-negocio-trade-offs.md
  */
 @Injectable()
 export class RolesGuard implements CanActivate {
