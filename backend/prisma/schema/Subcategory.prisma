@@ -1,0 +1,13 @@
+model Subcategory {
+  id         String   @id @default(uuid())
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  name       String
+  createdAt  DateTime @default(now())
+
+  tickets        Ticket[]
+  assignmentRule AssignmentRule?
+
+  @@unique([categoryId, name])
+  @@map("cat_subcategories")
+}

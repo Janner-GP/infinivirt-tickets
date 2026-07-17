@@ -1,0 +1,10 @@
+// Archivo raíz del schema (multi-file, ver docs/ADRs/006-prisma-multifile-schema.md)
+// Solo generator + datasource; cada modelo vive en su propio archivo en esta carpeta.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}

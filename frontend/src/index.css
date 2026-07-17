@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #f5f3ff;
+  --color-brand-100: #ede9fe;
+  --color-brand-200: #ddd6fe;
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
+
+  --color-surface-0: #0a0a0d;
+  --color-surface-1: #131317;
+  --color-surface-2: #1c1c22;
+  --color-surface-border: #2a2a32;
+  --color-surface-border-strong: #38383f;
+
+  --color-text-primary: #f4f4f6;
+  --color-text-secondary: #a3a3ad;
+  --color-text-muted: #6f6f7a;
+
+  --color-status-open: #93c5fd;
+  --color-status-open-bg: #1e2a47;
+  --color-status-progress: #c4b5fd;
+  --color-status-progress-bg: #2c2249;
+  --color-status-pending: #fcd34d;
+  --color-status-pending-bg: #3a2f10;
+  --color-status-resolved: #86efac;
+  --color-status-resolved-bg: #142e1c;
+  --color-status-closed: #a3a3ad;
+  --color-status-closed-bg: #232328;
+
+  --color-priority-low: #9ca3af;
+  --color-priority-medium: #7dd3fc;
+  --color-priority-high: #fb923c;
+  --color-priority-critical: #f87171;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--color-surface-0);
+  color: var(--color-text-primary);
+}

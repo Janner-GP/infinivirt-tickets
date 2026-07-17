@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: infinivirt_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: infinivirt
+      POSTGRES_PASSWORD: infinivirt
+      POSTGRES_DB: infinivirt
+    ports:
+      - "5432:5432"
+    volumes:
+      - infinivirt_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  infinivirt_postgres_data:

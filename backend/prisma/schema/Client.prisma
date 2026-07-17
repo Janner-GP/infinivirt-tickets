@@ -1,0 +1,13 @@
+model Client {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  company   String?
+  phone     String?
+  createdAt DateTime @default(now())
+
+  tickets Ticket[]
+  user    User?
+
+  @@map("cli_clients")
+}

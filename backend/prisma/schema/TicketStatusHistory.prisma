@@ -1,0 +1,13 @@
+model TicketStatusHistory {
+  id             String        @id @default(uuid())
+  ticketId       String
+  ticket         Ticket        @relation(fields: [ticketId], references: [id])
+  previousStatus TicketStatus?
+  newStatus      TicketStatus
+  changedById    String
+  changedBy      User          @relation(fields: [changedById], references: [id])
+  createdAt      DateTime      @default(now())
+
+  @@index([ticketId])
+  @@map("tkt_status_history")
+}

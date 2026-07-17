@@ -1,0 +1,10 @@
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
+  subcategories Subcategory[]
+  tickets       Ticket[]
+
+  @@map("cat_categories")
+}

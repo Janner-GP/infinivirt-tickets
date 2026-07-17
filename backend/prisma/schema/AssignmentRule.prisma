@@ -1,0 +1,13 @@
+// Regla fija: como máximo un agente responsable por subcategoría.
+// Ver docs/ADRs (decisión confirmada con el usuario) — solo "llena huecos",
+// no pisa la auto-asignación del Agente que crea su propio ticket.
+model AssignmentRule {
+  id            String      @id @default(uuid())
+  subcategoryId String      @unique
+  subcategory   Subcategory @relation(fields: [subcategoryId], references: [id])
+  agentId       String
+  agent         User        @relation(fields: [agentId], references: [id])
+  createdAt     DateTime    @default(now())
+
+  @@map("tkt_assignment_rules")
+}

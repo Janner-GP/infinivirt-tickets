@@ -1,0 +1,22 @@
+// Ver docs/ADRs/005-roles-as-enum.md
+enum Role {
+  ADMIN
+  AGENT
+  SUPERVISOR
+  CLIENT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  PENDING_CUSTOMER
+  RESOLVED
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}

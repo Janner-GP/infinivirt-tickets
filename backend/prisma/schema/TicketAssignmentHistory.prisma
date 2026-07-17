@@ -1,0 +1,15 @@
+model TicketAssignmentHistory {
+  id             String   @id @default(uuid())
+  ticketId       String
+  ticket         Ticket   @relation(fields: [ticketId], references: [id])
+  previousUserId String?
+  previousUser   User?    @relation("AssignmentPreviousUser", fields: [previousUserId], references: [id])
+  newUserId      String
+  newUser        User     @relation("AssignmentNewUser", fields: [newUserId], references: [id])
+  assignedById   String
+  assignedBy     User     @relation("AssignmentMadeBy", fields: [assignedById], references: [id])
+  createdAt      DateTime @default(now())
+
+  @@index([ticketId])
+  @@map("tkt_assignment_history")
+}

@@ -1,0 +1,26 @@
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Solo se usa cuando role = CLIENT: vincula la cuenta de login con su registro de negocio.
+  clientId String? @unique
+  client   Client? @relation(fields: [clientId], references: [id])
+
+  createdTickets      Ticket[]                  @relation("TicketCreatedBy")
+  assignedTickets     Ticket[]                  @relation("TicketAssignedTo")
+  comments            TicketComment[]
+  assignmentsMade     TicketAssignmentHistory[] @relation("AssignmentMadeBy")
+  assignmentsReceived TicketAssignmentHistory[] @relation("AssignmentNewUser")
+  assignmentsPrevious TicketAssignmentHistory[] @relation("AssignmentPreviousUser")
+  statusChanges       TicketStatusHistory[]
+  refreshTokens       RefreshToken[]
+  assignmentRules     AssignmentRule[]
+
+  @@map("usr_users")
+}

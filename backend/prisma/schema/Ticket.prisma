@@ -1,0 +1,34 @@
+model Ticket {
+  id            String         @id @default(uuid())
+  clientId      String
+  client        Client         @relation(fields: [clientId], references: [id])
+  categoryId    String
+  category      Category       @relation(fields: [categoryId], references: [id])
+  subcategoryId String
+  subcategory   Subcategory    @relation(fields: [subcategoryId], references: [id])
+  title         String
+  description   String
+  status        TicketStatus   @default(OPEN)
+  priority      TicketPriority
+  createdById   String
+  createdBy     User           @relation("TicketCreatedBy", fields: [createdById], references: [id])
+  assignedToId  String?
+  assignedTo    User?          @relation("TicketAssignedTo", fields: [assignedToId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  resolvedAt    DateTime?
+  closedAt      DateTime?
+
+  comments          TicketComment[]
+  assignmentHistory TicketAssignmentHistory[]
+  statusHistory     TicketStatusHistory[]
+
+  @@index([clientId])
+  @@index([assignedToId])
+  @@index([status])
+  @@index([priority])
+  @@index([updatedAt])
+  @@index([categoryId])
+  @@index([subcategoryId])
+  @@map("tkt_tickets")
+}

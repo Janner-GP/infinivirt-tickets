@@ -1,0 +1,13 @@
+// Ver docs/ADRs/007-refresh-token-persistence.md
+model RefreshToken {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  tokenHash String
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@map("aut_refresh_tokens")
+}
