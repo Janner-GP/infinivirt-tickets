@@ -3,14 +3,70 @@ services:
     image: postgres:16-alpine
     container_name: infinivirt_postgres
     restart: unless-stopped
+
     environment:
       POSTGRES_USER: infinivirt
       POSTGRES_PASSWORD: infinivirt
       POSTGRES_DB: infinivirt
+
     ports:
       - "5432:5432"
+
     volumes:
       - infinivirt_postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U infinivirt -d infinivirt"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    container_name: infinivirt_backend
+
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    image: infinivirt-backend:latest
+
+    restart: unless-stopped
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: infinivirt
+      DB_PASSWORD: infinivirt
+      DB_NAME: infinivirt
+
+      DATABASE_URL: postgresql://infinivirt:infinivirt@postgres:5432/infinivirt
+
+    ports:
+      - "3000:3000"
+
+  frontend:
+    container_name: infinivirt_frontend
+
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    image: infinivirt-frontend:latest
+
+    restart: unless-stopped
+
+    depends_on:
+      - backend
+
+    ports:
+      - "80:80"
 
 volumes:
   infinivirt_postgres_data:
